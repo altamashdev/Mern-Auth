@@ -147,6 +147,7 @@ export const logout = async (req, res) => {
       // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
       domain: "mern-auth-livid-seven.vercel.app",
+      path: "/",
     });
 
     return res.json({ success: true, message: "Logged Out" });
