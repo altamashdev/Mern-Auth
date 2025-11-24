@@ -44,7 +44,7 @@ const NavBar = () => {
       // for cookies always sure it true
       
       try {
-        const {data} = await axios.post(backendUrl + '/api/auth/logout');
+        const {data} = await axios.post(backendUrl + '/api/auth/logout' , {withCredentials:true});
         data.success && setIsLoggedIn(false);
         data.success && setUserData(false);
         navigate('/');
