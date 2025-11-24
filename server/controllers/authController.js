@@ -45,10 +45,10 @@ export const register = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       // set site is secure in production and if developement means localhost show http not https its connect with env
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
 
       // if code is on different domain it excute none and if localhost if excute strict
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      sameSite: "none",
       // the expire date of cookie for local storage this is syntex
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -113,10 +113,10 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       // set site is secure in production and if developement means localhost show http not https its connect with env
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
 
       // if code is on different domain it excute none and if localhost if excute strict
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      sameSite: "none",
 
       // the expire date of cookie for local storage this is syntex
       maxAge: 7 * 24 * 60 * 60 * 1000,
