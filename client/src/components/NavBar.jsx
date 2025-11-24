@@ -42,8 +42,7 @@ const NavBar = () => {
     const logout = async ()=>{
 
       // for cookies always sure it true
-      axios.defaults.withCredentials=true
-
+      
       try {
         const {data} = await axios.post(backendUrl + '/api/auth/logout');
         data.success && setIsLoggedIn(false);
