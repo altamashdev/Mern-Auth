@@ -49,6 +49,7 @@ export const register = async (req, res) => {
 
       // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
+      domain: "mern-auth-livid-seven.vercel.app",
       // the expire date of cookie for local storage this is syntex
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -117,6 +118,8 @@ export const login = async (req, res) => {
 
       // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
+
+      domain: "mern-auth-livid-seven.vercel.app",
 
       // the expire date of cookie for local storage this is syntex
       maxAge: 7 * 24 * 60 * 60 * 1000,
