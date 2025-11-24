@@ -5,8 +5,10 @@ import { Mail, Lock, LockIcon } from "lucide-react";
 import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
+
+axios.defaults.withCredentials = true;
+
 const ResetPassword = () => {
-   axios.defaults.withCredentials = true;
   const { backendUrl } = useContext(AppContent);
 
   const navigate = useNavigate();
@@ -45,8 +47,6 @@ const ResetPassword = () => {
 
   // Function For Email Submiting
   const onSubmitEmail = async (e) => {
-   
-
     e.preventDefault();
     try {
       const { data } = await axios.post(
@@ -72,24 +72,25 @@ const ResetPassword = () => {
   const onSubmitOtp = async (e) => {
     e.preventDefault();
 
-      // we got inputs value in this variable by user
-      const otpArray = inputRefs.current.map(e => e.value);
-      setOtp(otpArray.join(''));
-      setIsOtpSubmited(true)
-    
+    // we got inputs value in this variable by user
+    const otpArray = inputRefs.current.map((e) => e.value);
+    setOtp(otpArray.join(""));
+    setIsOtpSubmited(true);
   };
 
-  const onSubmitNewPassword = async (e)=>{
-
+  const onSubmitNewPassword = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post(backendUrl + "/api/auth/reset-password" ,{email,otp,newPassword});
-      data.success ? toast.success(data.message) : toast.error(data.message); 
-      data.success && navigate('/login');
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/reset-password",
+        { email, otp, newPassword }
+      );
+      data.success ? toast.success(data.message) : toast.error(data.message);
+      data.success && navigate("/login");
     } catch (error) {
       toast.error(error.message);
     }
-  }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen px-6 sm:p-0 bg-gradient-to-br from-blue-200 to-purple-400">
@@ -131,7 +132,10 @@ const ResetPassword = () => {
       )}
 
       {!isOtpSubmited && isEmailSent && (
-        <form onSubmit={onSubmitOtp} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
+        <form
+          onSubmit={onSubmitOtp}
+          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+        >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             Reset Password OTP
           </h1>
@@ -163,7 +167,10 @@ const ResetPassword = () => {
       )}
 
       {isOtpSubmited && isEmailSent && (
-        <form onSubmit={onSubmitNewPassword} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
+        <form
+          onSubmit={onSubmitNewPassword}
+          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+        >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             New Password
           </h1>

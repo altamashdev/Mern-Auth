@@ -47,13 +47,10 @@ export const register = async (req, res) => {
     // now we add token variable in cookie and save in localstorage
     res.cookie("token", token, {
       httpOnly: true,
-      // set site is secure in production and if developement means localhost show http not https its connect with env
       secure: true,
-
-      // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
       domain: "mern-auth-livid-seven.vercel.app",
-      // the expire date of cookie for local storage this is syntex
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -116,15 +113,10 @@ export const login = async (req, res) => {
     // now we add token variable in cookie and save in localstorage
     res.cookie("token", token, {
       httpOnly: true,
-      // set site is secure in production and if developement means localhost show http not https its connect with env
       secure: true,
-
-      // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
-
       domain: "mern-auth-livid-seven.vercel.app",
-
-      // the expire date of cookie for local storage this is syntex
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -142,9 +134,7 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      // set site is secure in production and if developement means localhost show http not https its connect with env
       secure: true,
-      // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
       domain: "mern-auth-livid-seven.vercel.app",
       path: "/",

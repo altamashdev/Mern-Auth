@@ -11,8 +11,11 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const EmailVarify = () => {
+
   axios.defaults.withCredentials = true;
+
+const EmailVarify = () => {
+
   // Getting from AppContext.jsx from backend direct
   const { backendUrl, isLoggedIn, userData, getUserData } =
     useContext(AppContent);

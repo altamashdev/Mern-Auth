@@ -8,13 +8,12 @@ export const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(false);
-  axios.defaults.withCredentials = true
 
   // Function gor checking already login or not means authentication
   const getAuthState = async ()=>{
     try {
       // use api for getting data
-      const {data} = await axios.get(backendUrl + '/api/auth/is-auth');
+      const {data} = await axios.get(backendUrl + '/api/auth/is-auth' , {withCredentials:true});
 
         if(data.success){
             setIsLoggedIn(true);
@@ -35,7 +34,7 @@ export const AppContextProvider = (props) => {
     try {
 
       
-      const { data } = await axios.get(backendUrl + "/api/user/data");
+      const { data } = await axios.get(backendUrl + "/api/user/data" ,{withCredentials:true});
 
       data.success ? setUserData(data.userData) : toast.error(data.message);
 

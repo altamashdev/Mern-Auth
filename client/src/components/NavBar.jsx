@@ -5,12 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { AppContent } from "../context/AppContext.jsx";
 import { toast } from "react-toastify";
 import axios from "axios";
+
+
+ axios.defaults.withCredentials=true
+
 const NavBar = () => {
   //creating navigate for redirection
   const navigate = useNavigate();
   const { userData, backendUrl, setUserData, setIsLoggedIn } =
     useContext(AppContent);
-  axios.defaults.withCredentials=true
+ 
 
     const sendVarificationOtp = async ()=>{
 

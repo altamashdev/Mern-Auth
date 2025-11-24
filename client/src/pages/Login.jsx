@@ -7,8 +7,10 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+axios.defaults.withCredentials = true;
+
 const Login = () => {
-  axios.defaults.withCredentials = true;
+  
   const navigate = useNavigate(); //for redirecting
 
   const { backendUrl, isLoggedIn, setIsLoggedIn, getUserData, userData } =
