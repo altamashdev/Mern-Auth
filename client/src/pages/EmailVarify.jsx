@@ -12,6 +12,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const EmailVarify = () => {
+  axios.defaults.withCredentials = true;
   // Getting from AppContext.jsx from backend direct
   const { backendUrl, isLoggedIn, userData, getUserData } =
     useContext(AppContent);
@@ -46,7 +47,7 @@ const EmailVarify = () => {
   };
 
   const onSubmitHandler = async (e) => {
-    axios.defaults.withCredentials = true;
+  
 
     try {
       e.preventDefault();

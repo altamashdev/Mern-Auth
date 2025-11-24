@@ -10,11 +10,9 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { userData, backendUrl, setUserData, setIsLoggedIn } =
     useContext(AppContent);
-
+  axios.defaults.withCredentials=true
 
     const sendVarificationOtp = async ()=>{
-
-      axios.defaults.withCredentials=true
 
       try {
         const {data} = await axios.post(backendUrl + '/api/auth/send-varify-otp');

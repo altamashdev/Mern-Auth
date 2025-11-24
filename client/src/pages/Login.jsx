@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate(); //for redirecting
 
   const { backendUrl, isLoggedIn, setIsLoggedIn, getUserData, userData } =
@@ -37,7 +38,7 @@ const Login = () => {
       e.preventDefault();
 
       // Make it always true for sending cookies in backend
-      axios.defaults.withCredentials = true;
+      
 
       //if state is sign-up hit api for signup
       if (state === "Sign Up") {

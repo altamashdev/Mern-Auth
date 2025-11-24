@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 connectDB();
 
 // in this variable we can use all frontend url where we want to add this backend
-const allowedOrigins = ['https://mern-auth-livid-seven.vercel.app','http://localhost:5173','http://10.180.128.106:5173','http://10.36.238.106:5173']
+const allowedOrigins = ['https://mern-auth-livid-seven.vercel.app','http://localhost:5173']
 
 app.use(express.json());
 app.use(cookieParser());

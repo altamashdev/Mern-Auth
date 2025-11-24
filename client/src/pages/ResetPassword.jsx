@@ -6,6 +6,7 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 const ResetPassword = () => {
+   axios.defaults.withCredentials = true;
   const { backendUrl } = useContext(AppContent);
 
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const ResetPassword = () => {
 
   // Function For Email Submiting
   const onSubmitEmail = async (e) => {
-    axios.defaults.withCredentials = true;
+   
 
     e.preventDefault();
     try {

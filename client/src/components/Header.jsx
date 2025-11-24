@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { AppContent } from "../context/AppContext";
 import { useEffect } from "react";
+import axios from "axios";
 
 const Header = () => {
+
+    axios.defaults.withCredentials = true ;
 
     const {userData} = useContext(AppContent);
 
