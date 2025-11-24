@@ -140,9 +140,10 @@ export const logout = async (req, res) => {
     res.clearCookie("token", {
       httpOnly: true,
       // set site is secure in production and if developement means localhost show http not https its connect with env
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       // if code is on different domain it excute none and if localhost if excute strict
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      sameSite: "none",
+      domain: "mern-auth-livid-seven.vercel.app"
     });
 
     return res.json({ success: true, message: "Logged Out" });
