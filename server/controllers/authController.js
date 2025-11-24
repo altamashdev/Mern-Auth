@@ -3,7 +3,10 @@ import jwt from "jsonwebtoken"; //For create token for authentication for checki
 import userModel from "../models/userModel.js"; //Datadbase se connected Model
 import transporter from "../config/nodemailer.js";
 // import userAuth from "../middleware/userAuth.js";
-import {EMAIL_VERIFY_TEMPLATE,PASSWORD_RESET_TEMPLATE} from '../config/emailTemplates.js'
+import {
+  EMAIL_VERIFY_TEMPLATE,
+  PASSWORD_RESET_TEMPLATE,
+} from "../config/emailTemplates.js";
 
 // Function For Register user
 export const register = async (req, res) => {
@@ -66,7 +69,7 @@ export const register = async (req, res) => {
     await transporter.sendMail(mailOptions);
 
     //After Sending Email the last one when also cookie save
-    return res.json({ success: true , message:"Sign-Up SuccessFully " });
+    return res.json({ success: true, message: "Sign-Up SuccessFully " });
   } catch (error) {
     //If any error by backend like cache
     res.json({ success: false, message: error.message });
@@ -127,7 +130,7 @@ export const login = async (req, res) => {
 
     // the last one when also cookie save
 
-    return res.json({ success: true , message:"Login SuccessFully"});
+    return res.json({ success: true, message: "Login SuccessFully" });
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
@@ -143,7 +146,7 @@ export const logout = async (req, res) => {
       secure: true,
       // if code is on different domain it excute none and if localhost if excute strict
       sameSite: "none",
-      domain: "mern-auth-livid-seven.vercel.app"
+      domain: "mern-auth-livid-seven.vercel.app",
     });
 
     return res.json({ success: true, message: "Logged Out" });
@@ -159,8 +162,6 @@ export const sendVarifyOtp = async (req, res) => {
     // userid ui se lena he
     const userId = req.userId;
 
-    
-
     // ui se li userId ko database wali uniqe id se match karna he
     const user = await userModel.findById(userId);
 
@@ -171,11 +172,9 @@ export const sendVarifyOtp = async (req, res) => {
         success: false,
         message: "Account Already Variefied",
       });
-    }
-
-      else{
-            if (user.varifyOtp === "") {
-      /*
+    } else {
+      if (user.varifyOtp === "") {
+        /*
     If user account not varify otp generate and send
      
     🔍 Step by step:
@@ -187,31 +186,34 @@ export const sendVarifyOtp = async (req, res) => {
      String(...) → converts that number into a string (so "527394").
      Useful if you want to send it in emails/SMS where leading zeroes matter.
      ✅ So output = "6-digit OTP as a string" */
-      const otp = String(Math.floor(100000 + Math.random() * 900000));
+        const otp = String(Math.floor(100000 + Math.random() * 900000));
 
-      user.varifyOtp = otp; // store otp in database before sending
-      user.varifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000; // otp expire automatic dynamic with this time line
+        user.varifyOtp = otp; // store otp in database before sending
+        user.varifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000; // otp expire automatic dynamic with this time line
 
-      // now save all upper details
-      await user.save();
-      console.log("USer save");
+        // now save all upper details
+        await user.save();
+        console.log("USer save");
 
-      // After save user detailse of otp or expire time we send this otp user by mail with nodemailer
-      const mailOptions = {
-        from: process.env.SENDER_EMAIL,
-        to: user.email,
-        subject: "Account Varification Otp",
-        html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}" , otp).replace("{{email}}" , user.email)
-      };
+        // After save user detailse of otp or expire time we send this otp user by mail with nodemailer
+        const mailOptions = {
+          from: process.env.SENDER_EMAIL,
+          to: user.email,
+          subject: "Account Varification Otp",
+          html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
+            "{{email}}",
+            user.email
+          ),
+        };
 
-      // Now Sending Email For varifieng account
+        // Now Sending Email For varifieng account
 
-      await transporter.sendMail(mailOptions);
-      return res.json({ success: true, message: "OTP sent" });
-    } else {
-      return res.json({ success: false, message: "OTP Already Sent" });
-    }
+        await transporter.sendMail(mailOptions);
+        return res.json({ success: true, message: "OTP sent" });
+      } else {
+        return res.json({ success: false, message: "OTP Already Sent" });
       }
+    }
   } catch (error) {
     res.json({
       success: false,
@@ -322,7 +324,10 @@ export const sendResetOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Password Reset OTP",
-      html:PASSWORD_RESET_TEMPLATE.replace("{{otp}}" , otp).replace("{{email}}" , user.email)
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
+        "{{email}}",
+        user.email
+      ),
     };
 
     // Now Sending Email For varifieng account
@@ -339,7 +344,7 @@ export const sendResetOtp = async (req, res) => {
 // Verify OTP for Reset Your password
 export const resetPassword = async (req, res) => {
   // user ke ui se email,otp,newPassword ki value lena
-  const { email,otp, newPassword } = req.body;
+  const { email, otp, newPassword } = req.body;
   if (!email || !otp || !newPassword) {
     // 1st check input fields are not empty
     return res.json({
