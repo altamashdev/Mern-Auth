@@ -25,7 +25,7 @@ const userAuth = async (req, res, next) => {
     next();
   } catch (error) {
     console.log("🛑 ERROR IN MIDDLEWARE:", "middleware");
-    return res.json({ success: false, message: "middleware catch Bug" });
+    return res.json({ success: false, message: error.message });
   }
 };
 

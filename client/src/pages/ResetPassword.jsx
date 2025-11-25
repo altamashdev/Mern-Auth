@@ -53,15 +53,13 @@ const ResetPassword = () => {
         backendUrl + "/api/auth/send-reset-otp",
         { email }
       );
-      if (
-        data.success === false &&
-        data.message === "Otp Send Already Check Email!"
-      ) {
-        toast.success(data.message);
-        setIsEmailSent(true);
-      } else {
+      
+      if(data.success === false && data.message === "Otp Send Already Check Email!"){
+          toast.success(data.message);
+          setIsEmailSent(true);
+      }else{
         data.success ? toast.success(data.message) : toast.error(data.message);
-        data.success && setIsEmailSent(true);
+        data.success && setIsEmailSent(true)
       }
     } catch (error) {
       toast.error(error.message);
@@ -85,8 +83,13 @@ const ResetPassword = () => {
         backendUrl + "/api/auth/reset-password",
         { email, otp, newPassword }
       );
-      data.success ? toast.success(data.message) : toast.error(data.message);
-      data.success && navigate("/login");
+      if(data.success === false && data.message === "OTP has Expired"){
+        toast.error(data.message);
+        navigate('/login');
+      }else{
+        data.success ? toast.success(data.message) : toast.error(data.message);
+        data.success && navigate("/login");
+      }
     } catch (error) {
       toast.error(error.message);
     }
