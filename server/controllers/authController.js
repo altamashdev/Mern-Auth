@@ -49,9 +49,8 @@ export const register = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "mern-auth-livid-seven.vercel.app",
       path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     // Create a Function for Sending Welcom Email Before response by backend
@@ -116,9 +115,8 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "mern-auth-livid-seven.vercel.app",
       path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     // the last one when also cookie save
@@ -139,8 +137,7 @@ export const logout = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "mern-auth-livid-seven.vercel.app",
-      path: '/',
+      path: '/'
     });
 
     return res.json({ success: true, message: "Logged Out" });
