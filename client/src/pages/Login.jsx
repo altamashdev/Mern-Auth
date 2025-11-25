@@ -7,10 +7,8 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.withCredentials = true;
-
 const Login = () => {
-  
+    
   const navigate = useNavigate(); //for redirecting
 
   const { backendUrl, isLoggedIn, setIsLoggedIn, getUserData, userData } =
@@ -36,6 +34,9 @@ const Login = () => {
   }, [isLoggedIn]);
 
   const onSubmitHandler = async (e) => {
+    
+    axios.defaults.withCredentials = true;
+
     try {
       e.preventDefault();
 

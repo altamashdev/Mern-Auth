@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 export const AppContent = createContext();
-
+axios.defaults.withCredentials = true
 export const AppContextProvider = (props) => {
   //importing backend url from .env file
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
