@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
-      "https://mern-auth-livid-seven.vercel.app",
+      "https://mern-auth-six-sigma.vercel.app",
       "http://localhost:5173"
     ];
 
