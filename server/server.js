@@ -12,15 +12,34 @@ const port = process.env.PORT || 4000;
 connectDB();
 
 // in this variable we can use all frontend url where we want to add this backend
-const allowedOrigins = [
-  "https://mern-auth-livid-seven.vercel.app",
-  "http://localhost:5173",
-];
+// const allowedOrigins = [
+//   "https://mern-auth-livid-seven.vercel.app",
+//   "http://localhost:5173",
+// ];
 
 // app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin:allowedOrigins,credentials:true}));
+app.use(cors({
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "https://mern-auth-livid-seven.vercel.app",
+      "http://localhost:5173"
+    ];
+
+    // Allow requests with no origin (e.g. mobile apps, curl, render health checks)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS Not Allowed"));
+    }
+  },
+  credentials: true,
+}));
 
 // for printing what will on Screen
 app.get("/", (req, res) => res.send("Api Working"));
