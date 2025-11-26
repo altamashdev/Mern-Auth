@@ -11,11 +11,6 @@ const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 
-// in this variable we can use all frontend url where we want to add this backend
-// const allowedOrigins = [
-//   "https://mern-auth-livid-seven.vercel.app",
-//   "http://localhost:5173",
-// ];
 
 // app.set("trust proxy", 1);
 app.use(express.json());
