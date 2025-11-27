@@ -17,12 +17,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    "https://mern-auth-six-sigma.vercel.app",
     "http://localhost:5173",
-    "http://10.178.123.106:5173"
+    "http://10.178.123.106:5173",
+    process.env.CLIENT_URL   // Cloudflare URL dynamic
   ],
   credentials: true
 }));
+
 
 // for printing what will on Screen
 app.get("/", (req, res) => res.send("Api Working"));

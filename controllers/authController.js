@@ -62,7 +62,7 @@ export const register = async (req, res) => {
     };
 
     // Now Sending Email
-    await transporter.sendMail(mailOptions);
+     transporter.sendMail(mailOptions);
 
     //After Sending Email the last one when also cookie save
     return res.json({ success: true, message: "Sign-Up SuccessFully " });
