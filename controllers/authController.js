@@ -49,8 +49,8 @@ export const register = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     // Create a Function for Sending Welcom Email Before response by backend
@@ -62,7 +62,9 @@ export const register = async (req, res) => {
     };
 
     // Now Sending Email
-     transporter.sendMail(mailOptions);
+    sendEmail(mailOptions)
+    .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
+      .catch((err) => console.log("EMAIL ERROR:", err));
 
     //After Sending Email the last one when also cookie save
     return res.json({ success: true, message: "Sign-Up SuccessFully " });
@@ -98,10 +100,9 @@ export const login = async (req, res) => {
     // if email exist match password with these email
     // Now matching password from database or from frontend value
     const isMatch = await bcrypt.compare(password, user.password);
-    
+
     // if password not matched
     if (!isMatch) {
-      
       return res.json({ success: false, message: "Invalide Password" });
     }
 
@@ -115,15 +116,13 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     // the last one when also cookie save
 
-    
     return res.json({ success: true, message: "Login SuccessFully" });
-    
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
@@ -137,7 +136,7 @@ export const logout = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path: '/'
+      path: "/",
     });
 
     return res.json({ success: true, message: "Logged Out" });
@@ -199,7 +198,12 @@ export const sendVarifyOtp = async (req, res) => {
 
         // Now Sending Email For varifieng account
 
-         transporter.sendMail(mailOptions);
+        sendEmail(mailOptions)
+        .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
+      .catch((err) => console.log("EMAIL ERROR:", err));
+
+
+
         return res.json({ success: true, message: "OTP sent" });
       } else {
         return res.json({ success: false, message: "OTP Already Sent" });
@@ -322,7 +326,9 @@ export const sendResetOtp = async (req, res) => {
     };
 
     // Now Sending Email For varifieng account
-     transporter.sendMail(mailOptions);
+    sendEmail(mailOptions)
+      .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
+      .catch((err) => console.log("EMAIL ERROR:", err));
     console.log("Mail sent");
 
     // Don's Forget it in any code of this type
@@ -352,14 +358,12 @@ export const resetPassword = async (req, res) => {
 
     //now one by one condition check
 
-
-
     if (!user) {
       //checking user is available or not in database
       return res.json({ success: false, message: "User not found" });
     }
 
-     //now checking user OTP expired or not
+    //now checking user OTP expired or not
     if (user.resetOtpExpireAt < Date.now()) {
       user.resetOtp = "";
       user.resetOtpExpireAt = 0;
@@ -367,13 +371,11 @@ export const resetPassword = async (req, res) => {
       return res.json({ success: false, message: "OTP has Expired" });
     }
 
-
     //now checking  in database resetOtp is empty or otp value is same as user input value
     if (user.resetOtp === "" || user.resetOtp !== otp) {
       return res.json({ success: false, message: "Invalide OTP" });
     }
 
-   
     // Password Secured By Hashed Before Store in Database
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 

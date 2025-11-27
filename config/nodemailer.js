@@ -1,19 +1,24 @@
-//i use BREVO smtp for this app
-import nodemailer from 'nodemailer'
+import Brevo from "@getbrevo/brevo";
 
-// creating a default function for call anywhere we want to send mail
-const transporter = nodemailer.createTransport({
+export const sendEmail = async (to, subject, html) => {
+  try {
+    const apiInstance = new Brevo.TransactionalEmailsApi();
+    apiInstance.setApiKey(
+      Brevo.TransactionalEmailsApiApiKeys.apiKey,
+      process.env.BREVO_API_KEY
+    );
 
-    // this all info from brevo the smtp provider 
-    host: 'smtp-relay.brevo.com',
-    port: 587,
-    secure: false,
-    auth: {
+    const sendSmtpEmail = new Brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { name: "Sanjeet Water Supplier", email: process.env.SENDER_EMAIL };
+    sendSmtpEmail.to = [{ email: to }];
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.htmlContent = html;
 
-        // its from env folder but also from brevo in env
-        user : process.env.SMTP_USER,
-        pass : process.env.SMTP_PASS
-    }
-});
-
-export default transporter;
+    const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log("EMAIL SENT:", result);
+    return true;
+  } catch (err) {
+    console.log("EMAIL ERROR:", err);
+    return false;
+  }
+};
