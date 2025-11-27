@@ -70,7 +70,7 @@ const NavBar = () => {
         onClick={() => navigate("/")}
         src={assets.logo_smalls}
         alt="Logo"
-        className="w-20 rounded-full sm:w-20 hover:cursor-pointer"
+        className="w-15 rounded-full sm:w-15 hover:cursor-pointer"
       />
 
       {/* This is dynamic if user is logged in means data is availael or authenticated than show profile if not than show login pannel */}

@@ -8,7 +8,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Login = () => {
-    
   const navigate = useNavigate(); //for redirecting
 
   const { backendUrl, isLoggedIn, setIsLoggedIn, getUserData, userData } =
@@ -34,21 +33,27 @@ const Login = () => {
   }, [isLoggedIn]);
 
   const onSubmitHandler = async (e) => {
-    
-     try {
+    try {
       e.preventDefault();
 
       // Make it always true for sending cookies in backend
-      
 
       //if state is sign-up hit api for signup
       if (state === "Sign Up") {
         //hit api on backend and also send data
-        const { data } = await axios.post(backendUrl + "/api/auth/register", {
-          name,
-          email,
-          password,
-        });
+        const { data } = await axios.post(
+          backendUrl + "/api/auth/register",
+          {
+            name,
+            email,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        );
 
         // if data send successfully than set logged in
         if (data.success) {
@@ -60,10 +65,18 @@ const Login = () => {
         }
       } else {
         //hit api on backend and also send data
-        const { data } = await axios.post(backendUrl + "/api/auth/login", {
-          email,
-          password,
-        });
+        const { data } = await axios.post(
+          backendUrl + "/api/auth/login",
+          {
+            email,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            },
+          }
+        );
 
         // if data send successfully than set logged in
         if (data.success) {

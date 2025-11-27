@@ -11,10 +11,7 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
-
 const EmailVarify = () => {
-
   // Getting from AppContext.jsx from backend direct
   const { backendUrl, isLoggedIn, userData, getUserData } =
     useContext(AppContent);
@@ -49,8 +46,6 @@ const EmailVarify = () => {
   };
 
   const onSubmitHandler = async (e) => {
-  
-
     try {
       e.preventDefault();
 
@@ -63,7 +58,12 @@ const EmailVarify = () => {
       // Now we send this otp on backend to check with database
       const { data } = await axios.post(
         backendUrl + "/api/auth/varify-account",
-        { otp }
+        { otp },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
       );
 
       if (data.success) {
@@ -71,7 +71,7 @@ const EmailVarify = () => {
         getUserData();
         navigate("/");
         // isLoggedIn(true);
-      }else{
+      } else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -79,9 +79,9 @@ const EmailVarify = () => {
     }
   };
 
-  useEffect(()=>{
-      isLoggedIn && userData && userData.isAccountVarified && navigate('/');
-  },[isLoggedIn,userData]);
+  useEffect(() => {
+    isLoggedIn && userData && userData.isAccountVarified && navigate("/");
+  }, [isLoggedIn, userData]);
 
   return (
     <div className="flex items-center justify-center min-h-screen px-6 sm:p-0 bg-gradient-to-br from-blue-200 to-purple-400">
@@ -93,7 +93,10 @@ const EmailVarify = () => {
         className="absolute left-40 top-15 sm:top-5 sm:left-20 top-5 w-25 sm:w-25 cursor-pointer rounded-full"
       />
 
-      <form className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm" onSubmit={onSubmitHandler}>
+      <form
+        className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+        onSubmit={onSubmitHandler}
+      >
         <h1 className="text-white text-2xl font-semibold text-center mb-4">
           Email Verify OTP
         </h1>

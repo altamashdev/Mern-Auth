@@ -6,7 +6,6 @@ import { AppContent } from "../context/AppContext.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const ResetPassword = () => {
   const { backendUrl } = useContext(AppContent);
 
@@ -50,15 +49,23 @@ const ResetPassword = () => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/auth/send-reset-otp",
-        { email }
+        { email },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      
-      if(data.success === false && data.message === "Otp Send Already Check Email!"){
-          toast.success(data.message);
-          setIsEmailSent(true);
-      }else{
+
+      if (
+        data.success === false &&
+        data.message === "Otp Send Already Check Email!"
+      ) {
+        toast.success(data.message);
+        setIsEmailSent(true);
+      } else {
         data.success ? toast.success(data.message) : toast.error(data.message);
-        data.success && setIsEmailSent(true)
+        data.success && setIsEmailSent(true);
       }
     } catch (error) {
       toast.error(error.message);
@@ -80,12 +87,17 @@ const ResetPassword = () => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/auth/reset-password",
-        { email, otp, newPassword }
+        { email, otp, newPassword },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      if(data.success === false && data.message === "OTP has Expired"){
+      if (data.success === false && data.message === "OTP has Expired") {
         toast.error(data.message);
-        navigate('/login');
-      }else{
+        navigate("/login");
+      } else {
         data.success ? toast.success(data.message) : toast.error(data.message);
         data.success && navigate("/login");
       }
