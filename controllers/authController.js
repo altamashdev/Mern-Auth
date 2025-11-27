@@ -199,7 +199,7 @@ export const sendVarifyOtp = async (req, res) => {
 
         // Now Sending Email For varifieng account
 
-        await transporter.sendMail(mailOptions);
+         transporter.sendMail(mailOptions);
         return res.json({ success: true, message: "OTP sent" });
       } else {
         return res.json({ success: false, message: "OTP Already Sent" });
@@ -322,7 +322,7 @@ export const sendResetOtp = async (req, res) => {
     };
 
     // Now Sending Email For varifieng account
-    await transporter.sendMail(mailOptions);
+     transporter.sendMail(mailOptions);
     console.log("Mail sent");
 
     // Don's Forget it in any code of this type
