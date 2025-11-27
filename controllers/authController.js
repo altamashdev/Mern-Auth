@@ -53,13 +53,12 @@ export const register = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-
     // Now Sending Email
-    sendEmail({
-      to: email,
-      subject: "Welcome To Sanjeet Water Supplier",
-      text: `Welcome to Sanjeet Water Supplier Your Account has created with email id : ${email}`,
-    });
+    sendEmail(
+      email,
+      "Welcome To Sanjeet Water Supplier",
+      `Welcome to Sanjeet Water Supplier! Your account has been created with email id: ${email}`
+    );
 
     //After Sending Email the last one when also cookie save
     return res.json({ success: true, message: "Sign-Up SuccessFully " });
