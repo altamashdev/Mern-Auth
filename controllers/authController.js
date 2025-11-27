@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"; //For Encrypt Password
 import jwt from "jsonwebtoken"; //For create token for authentication for checking user exist
 import userModel from "../models/userModel.js"; //Datadbase se connected Model
-import {sendEmail} from "../config/nodemailer.js";
+import { sendEmail } from "../config/nodemailer.js";
 // import userAuth from "../middleware/userAuth.js";
 import {
   EMAIL_VERIFY_TEMPLATE,
@@ -53,18 +53,13 @@ export const register = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    // Create a Function for Sending Welcom Email Before response by backend
-    const mailOptions = {
-      from: process.env.SENDER_EMAIL,
+
+    // Now Sending Email
+    sendEmail({
       to: email,
       subject: "Welcome To Sanjeet Water Supplier",
       text: `Welcome to Sanjeet Water Supplier Your Account has created with email id : ${email}`,
-    };
-
-    // Now Sending Email
-    sendEmail(mailOptions)
-    .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
-      .catch((err) => console.log("EMAIL ERROR:", err));
+    });
 
     //After Sending Email the last one when also cookie save
     return res.json({ success: true, message: "Sign-Up SuccessFully " });
@@ -185,24 +180,16 @@ export const sendVarifyOtp = async (req, res) => {
         await user.save();
         console.log("USer save");
 
-        // After save user detailse of otp or expire time we send this otp user by mail with nodemailer
-        const mailOptions = {
-          from: process.env.SENDER_EMAIL,
-          to: user.email,
-          subject: "Account Varification Otp",
-          html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
-            "{{email}}",
-            user.email
-          ),
-        };
-
         // Now Sending Email For varifieng account
 
-        sendEmail(mailOptions)
-        .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
-      .catch((err) => console.log("EMAIL ERROR:", err));
-
-
+        sendEmail(
+          user.email,
+          "Account Varification Otp",
+          EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
+            "{{email}}",
+            user.email
+          )
+        );
 
         return res.json({ success: true, message: "OTP sent" });
       } else {
@@ -314,21 +301,15 @@ export const sendResetOtp = async (req, res) => {
     // now save all upper details
     await user.save();
 
-    // After save user detailse of otp or expire time we send this otp user by mail with nodemailer
-    const mailOptions = {
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: "Password Reset OTP",
-      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
+    // Now Sending Email For varifieng account
+    sendEmail(
+      user.email,
+      "Password Reset OTP",
+      PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
         "{{email}}",
         user.email
-      ),
-    };
-
-    // Now Sending Email For varifieng account
-    sendEmail(mailOptions)
-      .then(() => console.log("EMAIL SENT SUCCESSFULLY"))
-      .catch((err) => console.log("EMAIL ERROR:", err));
+      )
+    );
     console.log("Mail sent");
 
     // Don's Forget it in any code of this type
