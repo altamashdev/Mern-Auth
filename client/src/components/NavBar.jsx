@@ -75,7 +75,7 @@ const NavBar = () => {
 
       {/* This is dynamic if user is logged in means data is availael or authenticated than show profile if not than show login pannel */}
       {userData ? (
-        <div onClick={divOpen} className="w-8 h-8 flex text-sm justify-center items-center rounded-full bg-black text-white cursor-pointer relative group">
+        <div onClick={divOpen} className="w-10 h-10 flex text-sm justify-center items-center rounded-full bg-black text-white cursor-pointer relative group">
           {/* Get userdata dynamic with only first capital letter */}
           <h1>{userData.name.charAt(0).toUpperCase()}</h1>
           
