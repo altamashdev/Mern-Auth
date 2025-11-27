@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 
- axios.defaults.withCredentials=true
-
 const NavBar = () => {
   //creating navigate for redirection
   const navigate = useNavigate();

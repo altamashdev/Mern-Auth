@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { AppContent } from "../context/AppContext";
 import { useEffect } from "react";
-import axios from "axios";
 
-  axios.defaults.withCredentials = true ;
 const Header = () => {
 
 

@@ -35,9 +35,7 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     
-    axios.defaults.withCredentials = true;
-
-    try {
+     try {
       e.preventDefault();
 
       // Make it always true for sending cookies in backend
