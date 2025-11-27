@@ -7,6 +7,7 @@ const transporter = nodemailer.createTransport({
     // this all info from brevo the smtp provider 
     host: 'smtp-relay.brevo.com',
     port: 587,
+    secure: false,
     auth: {
 
         // its from env folder but also from brevo in env
