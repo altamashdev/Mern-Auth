@@ -68,7 +68,7 @@ const NavBar = () => {
     <div className="w-full flex justify-between items-center p-6 sm:p-6 sm:px-24 absolute top-0 left-0">
       <img
         onClick={() => navigate("/")}
-        src={assets.logo_big}
+        src={assets.logo_smalls}
         alt="Logo"
         className="w-20 rounded-full sm:w-20 hover:cursor-pointer"
       />

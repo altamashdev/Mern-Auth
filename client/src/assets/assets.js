@@ -3,6 +3,7 @@ import logo_big from './logo1.png'
 import header_img from './header_img.png'
 import hand_wave from './hand_wave.png'
 import logo from './logo.png'
+import logo_smalls from './image.png'
 
 
 export const assets = {
@@ -10,5 +11,6 @@ export const assets = {
     logo_big,
     header_img,
     hand_wave,
-    logo
+    logo,
+    logo_smalls
 }
