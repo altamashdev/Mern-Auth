@@ -16,24 +16,11 @@ app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      "https://mern-auth-six-sigma.vercel.app",
-      "http://localhost:5173"
-    ];
-
-    // Allow requests with no origin (e.g. mobile apps, curl, render health checks)
-    if (!origin) {
-      return callback(null, true);
-    }
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("CORS Not Allowed"));
-    }
-  },
-  credentials: true,
+  origin: [
+    "https://mern-auth-six-sigma.vercel.app",
+    "http://localhost:5173"
+  ],
+  credentials: true
 }));
 
 // for printing what will on Screen
