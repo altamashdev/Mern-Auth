@@ -80,7 +80,7 @@ const NavBar = () => {
           <h1>{userData.name.charAt(0).toUpperCase()}</h1>
           
           {/* Profile Box after hover or click in mobile */}
-          <div className={`absolute group-hover:block top-0 right-0 z-10 text-black rounded pt-10 ${open}`}  >
+          <div className={`absolute group-hover:block top-5 right-0 z-10 text-black rounded pt-10 ${open}`}  >
               <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
                 
                 {/* Dynamic Show if Verify and not There 2 way of condition but its best for there are */}
