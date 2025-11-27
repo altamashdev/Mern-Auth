@@ -56,10 +56,7 @@ const Login = () => {
         if (data.success) {
           setIsLoggedIn(true); //User show Logged in
           await getUserData();
-          toast.success(data.message, {
-            autoClose: 3000,
-            onClose: () => navigate("/"),
-          });
+          toast.success(data.message);
         } else {
           toast.error(data.message);
         }
@@ -74,10 +71,7 @@ const Login = () => {
         if (data.success) {
           setIsLoggedIn(true); //User show Logged in
           await getUserData();
-          toast.success(data.message, {
-            autoClose: 3000,
-            onClose: () => navigate("/"),
-          });
+          toast.success(data.message);
         } else {
           toast.error(data.message);
         }
