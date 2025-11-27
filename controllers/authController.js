@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"; //For Encrypt Password
 import jwt from "jsonwebtoken"; //For create token for authentication for checking user exist
 import userModel from "../models/userModel.js"; //Datadbase se connected Model
-import sendEmail from "../config/nodemailer.js";
+import {sendEmail} from "../config/nodemailer.js";
 // import userAuth from "../middleware/userAuth.js";
 import {
   EMAIL_VERIFY_TEMPLATE,
