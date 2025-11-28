@@ -114,6 +114,7 @@ const ResetPassword = () => {
         src={assets.logo_smalls}
         alt=""
         className="absolute left-40 top-15 sm:top-5 sm:left-20 top-5 w-25 sm:w-25 cursor-pointer rounded-full"
+        loading="lazy"
       />
 
       {!isEmailSent && (
