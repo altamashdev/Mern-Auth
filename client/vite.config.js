@@ -9,13 +9,18 @@ export default defineConfig({
     tailwind(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["/logo.png", "bg_img.png", "banner.png","header_img.png"],
+      includeAssets: [
+        "/logo.png",
+        "bg_img.png",
+        "banner.png",
+        "header_img.png",
+      ],
       manifest: {
         name: "Sanjeet Water Supplier",
         short_name: "SWS",
         description: "Order water easily and fast",
-        theme_color: "#ffffff",
-        background_color: "linear-gradient(90deg,rgba(255, 255, 255, 1) 0%, rgba(234, 161, 240, 1) 23%, rgba(163, 22, 168, 1) 53%);",
+        background_color: "#a316a8",
+        theme_color: "#a316a8",
         display: "standalone",
         orientation: "portrait",
         icons: [
