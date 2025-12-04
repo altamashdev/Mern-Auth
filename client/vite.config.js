@@ -15,7 +15,7 @@ export default defineConfig({
         short_name: "SWS",
         description: "Order water easily and fast",
         theme_color: "#ffffff",
-        background_color: "#ffffff",
+        background_color: "linear-gradient(90deg,rgba(255, 255, 255, 1) 0%, rgba(234, 161, 240, 1) 23%, rgba(163, 22, 168, 1) 53%);",
         display: "standalone",
         orientation: "portrait",
         icons: [
