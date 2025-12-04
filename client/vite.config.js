@@ -9,7 +9,7 @@ export default defineConfig({
     tailwind(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["/logo.png", "bg_img.png", "banner.png"],
+      includeAssets: ["/logo.png", "bg_img.png", "banner.png","header_img.png"],
       manifest: {
         name: "Sanjeet Water Supplier",
         short_name: "SWS",
