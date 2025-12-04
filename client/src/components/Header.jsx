@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className="flex flex-col items-center mt-0 sm:mt-0 px-4 text-center text-gray-800">
       <img
-        src={assets.header_img}
+        src={'/header_img.png'}
         alt=""
         className="w-36  h-36 rounded-full mb-6"
       />
